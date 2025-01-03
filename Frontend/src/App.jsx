@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Dashboard from "./Pages/Dashboard";
 import SubjectDetail from "./Pages/SubjectDetail"; 
 
@@ -13,3 +13,4 @@ const App = () => {
     </Router>
   );
 };
+export default App;

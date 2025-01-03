@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
-import Link from "react-router-dom";
+import { Link } from 'react-router-dom'; // Corrected import
 
 const SubjectList = () => {
     const [subjects, setSubjects] = useState([]);
