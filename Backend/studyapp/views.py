@@ -1,9 +1,9 @@
-from rest_framework import viewsets,generics
+from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import User, Subject, Task, Schedule, Reminder, Progress
-from .serializers import UserSerializer, SubjectSerializer, TaskSerializer, UserSerializer, ScheduleSerializer, ReminderSerializer, ProgressSerializer
+from .serializers import UserSerializer, SubjectSerializer, TaskSerializer, ScheduleSerializer, ReminderSerializer, ProgressSerializer
 
-# Create your views here.
+#views here
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -14,12 +14,12 @@ class SubjectViewSet(viewsets.ModelViewSet):
     serializer_class = SubjectSerializer
     permission_classes = [IsAuthenticated]
 
-#return subjects for the authenticated user
     def get_queryset(self):
+        # Return subjects for the authenticated user
         return self.queryset.filter(user=self.request.user)
-    
-    #automatically associate the subject with the authenticated user
+
     def perform_create(self, serializer):
+        # Automatically associate the subject with the authenticated user
         serializer.save(user=self.request.user)
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -55,10 +55,11 @@ class ReminderViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class ProgressViewSet(viewsets.ModelViewSet):
+class ProgressViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Progress.objects.all()
     serializer_class = ProgressSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
+
